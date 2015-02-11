@@ -1,0 +1,3 @@
+uek_demo_homepage:
+    path:     /
+    defaults: { _controller: UekDemoBundle:Default:index }

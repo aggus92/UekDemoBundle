@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>FILMY</title>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<div class="container">
+			<header class="row">
+				<div class="page-header text-uppercase">
+					{% block header %}
+					{% endblock %}
+				</div>
+			</header>
+			{% if is_granted('ROLE_USER') %}
+				<div class="row">
+					<p>
+						Jesteœ zalogowany jako {{app.user.username}}. 
+						<a href="{{path('fos_user_security_logout')}}" class="btn btn-primary">Wyloguj</a>
+					</p>
+				</div>
+			{% else %}
+				<p>
+					Nie jesteœ zalogowany - 
+					<a href="{{path('fos_user_security_login')}}" class="btn btn-primary">Zaloguj</a>
+					Jeœli nie masz konta - <a href="{{path('fos_user_registration_register')}}" class="btn btn-primary">Zarejestruj siê</a>
+				</p>
+			{% endif %}
+			<div class="row">
+				<div class="col-md-4">
+					{% block menu %}
+					{% endblock %}
+				</div>
+				<div class="col-md-8">
+					{% block content %}
+						{% block fos_user_content %}
+						{% endblock %}
+					{% endblock %}
+				</div>
+			</div>
+			<footer class="row">
+			</footer>
+		</div>
+	</body>
+</html>
