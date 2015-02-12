@@ -4,6 +4,8 @@
 	<head>
 		<title>FILMY</title>
 		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('bundles/uekdemo/css/bootstrap.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('bundles/uekdemo/css/main.css') }}">
 	</head>
 	<body>
 		<div class="container">
@@ -16,15 +18,15 @@
 			{% if is_granted('ROLE_USER') %}
 				<div class="row">
 					<p>
-						Jesteú zalogowany jako {{app.user.username}}. 
+						Jeste≈õ zalogowany jako {{app.user.username}}. 
 						<a href="{{path('fos_user_security_logout')}}" class="btn btn-primary">Wyloguj</a>
 					</p>
 				</div>
 			{% else %}
 				<p>
-					Nie jesteú zalogowany - 
-					<a href="{{path('fos_user_security_login')}}" class="btn btn-primary">Zaloguj</a>
-					Jeúli nie masz konta - <a href="{{path('fos_user_registration_register')}}" class="btn btn-primary">Zarejestruj siÍ</a>
+					Nie jeste≈õ zalogowany - 
+					<a href="{{path('fos_user_security_login')}}" class="btn btn-primary">Zaloguj</a><br><br>
+					Je≈ºli nie masz konta - <a href="{{path('fos_user_registration_register')}}" class="btn btn-primary">Zarejestruj siƒô</a><br>
 				</p>
 			{% endif %}
 			<div class="row">

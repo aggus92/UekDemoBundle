@@ -1,0 +1,16 @@
+.alert, 
+.panel
+{
+	margin-top: 20px;
+}
+
+.moja-klasa
+{
+	margin: 10px;
+}
+
+.form-horizontal .checkbox
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
