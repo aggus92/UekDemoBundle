@@ -1,0 +1,84 @@
+<?php
+
+namespace Uek\DemoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Filmy
+ *
+ * @ORM\Table(name="Filmy")
+ * @ORM\Entity
+ */
+class Filmy
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="IdFilmu", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idfilmu;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="TytulFilmu", type="string", length=255, nullable=false)
+     */
+    private $tytulfilmu;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="opis", type="text", length=65535, nullable=true)
+     */
+    private $opis;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="oplata", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $oplata;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Aktorzy", inversedBy="idfilmu")
+     * @ORM\JoinTable(name="filmyaktorzy",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="IdFilmu", referencedColumnName="IdFilmu")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="IdAktora", referencedColumnName="IdAktora")
+     *   }
+     * )
+     */
+    private $idaktora;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Gatunki", inversedBy="idfilmu")
+     * @ORM\JoinTable(name="filmygatunki",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="IdFilmu", referencedColumnName="IdFilmu")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="Gatunek", referencedColumnName="Gatunek")
+     *   }
+     * )
+     */
+    private $gatunek;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idaktora = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->gatunek = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

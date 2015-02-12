@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Recenzje" table="Recenzje">
+    <indexes>
+      <index name="IdFilmu" columns="IdFilmu"/>
+    </indexes>
+    <id name="idrecenzji" type="integer" column="IdRecenzji">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tresc" type="text" column="Tresc" length="65535" nullable="true"/>
+    <field name="autor" type="string" column="Autor" length="255" nullable="true"/>
+    <many-to-one field="idfilmu" target-entity="Filmy">
+      <join-columns>
+        <join-column name="IdFilmu" referenced-column-name="IdFilmu"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

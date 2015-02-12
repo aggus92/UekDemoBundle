@@ -1,0 +1,53 @@
+<?php
+
+namespace Uek\DemoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Aktorzy
+ *
+ * @ORM\Table(name="Aktorzy")
+ * @ORM\Entity
+ */
+class Aktorzy
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="IdAktora", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idaktora;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="NazwiskoAktora", type="string", length=255, nullable=true)
+     */
+    private $nazwiskoaktora;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ImieAktora", type="string", length=255, nullable=true)
+     */
+    private $imieaktora;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Filmy", mappedBy="idaktora")
+     */
+    private $idfilmu;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idfilmu = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

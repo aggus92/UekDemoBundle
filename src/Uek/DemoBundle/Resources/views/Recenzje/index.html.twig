@@ -1,0 +1,34 @@
+{% extends "UekDemoBundle::bars.html.twig" %}
+
+{% block header %}
+	<h1>Lista Recenzji</h1>
+{% endblock %}
+{% block content %}
+
+	<div class="panel-body">
+		{% if recenzje|length == 0 %}
+			<div class="alert alert-info" role="alert">Nikt jeszcze nie dodał recenzji do filmów</div>
+			{% else %}
+			<table class="table table-hover">
+				<thead>  
+					<tr>  
+						<th>IdRecenzji</th>  
+						<th>Treść</th>  
+						<th>Autor</th>
+					</tr>  
+				</thead>  
+			<tbody>
+			{% for item in recenzje %}
+				<tr>	 
+					 <td>{{ item.idRecenzji }}</td> 
+					 <td>{{ item.Tresc }}</td> 
+					 <td>{{ item.Autor }}</td> 
+
+				</tr>	 
+			{% endfor %}
+			</tbody>
+			</table>
+		{% endif %}
+	</div>
+
+{% endblock %}

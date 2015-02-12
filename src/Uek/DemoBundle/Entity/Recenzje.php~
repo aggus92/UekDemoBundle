@@ -1,0 +1,49 @@
+<?php
+
+namespace Uek\DemoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Recenzje
+ *
+ * @ORM\Table(name="Recenzje", indexes={@ORM\Index(name="IdFilmu", columns={"IdFilmu"})})
+ * @ORM\Entity
+ */
+class Recenzje
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="IdRecenzji", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idrecenzji;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Tresc", type="text", length=65535, nullable=true)
+     */
+    private $tresc;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Autor", type="string", length=255, nullable=true)
+     */
+    private $autor;
+
+    /**
+     * @var \Filmy
+     *
+     * @ORM\ManyToOne(targetEntity="Filmy")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IdFilmu", referencedColumnName="IdFilmu")
+     * })
+     */
+    private $idfilmu;
+
+
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Filmy" table="Filmy">
+    <id name="idfilmu" type="integer" column="IdFilmu">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tytulfilmu" type="string" column="TytulFilmu" length="255" nullable="false"/>
+    <field name="opis" type="text" column="opis" length="65535" nullable="true"/>
+    <field name="oplata" type="float" column="oplata" precision="10" scale="0" nullable="true"/>
+    <many-to-many field="gatunek" target-entity="Gatunki" inversed-by="idfilmu">
+      <join-table name="filmygatunki">
+        <join-columns>
+          <join-column name="IdFilmu" referenced-column-name="IdFilmu"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="Gatunek" referenced-column-name="Gatunek"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="idaktora" target-entity="Aktorzy" inversed-by="idfilmu">
+      <join-table name="filmyaktorzy">
+        <join-columns>
+          <join-column name="IdFilmu" referenced-column-name="IdFilmu"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="IdAktora" referenced-column-name="IdAktora"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,39 @@
+<?php
+
+namespace Uek\DemoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Gatunki
+ *
+ * @ORM\Table(name="Gatunki")
+ * @ORM\Entity
+ */
+class Gatunki
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Gatunek", type="string", length=15, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $gatunek;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Filmy", mappedBy="gatunek")
+     */
+    private $idfilmu;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idfilmu = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
