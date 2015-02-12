@@ -11,3 +11,8 @@ uek_demo_filmy_index:
     path:     /filmy/index
     defaults:
         _controller: UekDemoBundle:Filmy:index
+
+uek_demo_gatunki_index:
+    path:     /gatunki/index
+    defaults:
+        _controller: UekDemoBundle:Gatunki:index
