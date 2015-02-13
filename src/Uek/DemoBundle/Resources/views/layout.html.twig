@@ -15,7 +15,7 @@
 					{% endblock %}
 				</div>
 			</header>
-			{% if is_granted('ROLE_USER') %}
+			 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 				<div class="row">
 					<p>
 						Jesteś zalogowany jako {{app.user.username}}. 
@@ -42,6 +42,7 @@
 				</div>
 			</div>
 			<footer class="row">
+				<p>(c) Copyright Sobocińska Agnieszka</p>
 			</footer>
 		</div>
 	</body>
