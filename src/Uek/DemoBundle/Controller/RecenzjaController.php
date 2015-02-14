@@ -5,12 +5,11 @@ namespace Uek\DemoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Uek\DemoBundle\Entity\Recenzje;
 use Uek\DemoBundle\Entity\Filmy;
-use Uek\DemoBundle\Form\RecenzjaType;
 use Symfony\Component\HttpFoundation\Request;
 
 class RecenzjaController extends Controller
 {
-	public function indexAction(Request $request) 
+	public function indexAction() 
 	{
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery(
