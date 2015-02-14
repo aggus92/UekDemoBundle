@@ -6,24 +6,25 @@
 {% block content %}
 
 	<div class="panel-body">
-		{% if recenzje|length == 0 %}
+		{% if recenzja|length == 0 %}
 			<div class="alert alert-info" role="alert">Nikt jeszcze nie dodał recenzji do filmów</div>
 			{% else %}
 			<table class="table table-hover">
 				<thead>  
 					<tr>  
-						<th>IdRecenzji</th>  
-						<th>Treść</th>  
+						<th>IdRecenzji</th> 
+						<th>Tytuł</th>  
+						<th>Treść</th>
 						<th>Autor</th>
 					</tr>  
 				</thead>  
 			<tbody>
-			{% for item in recenzje %}
+			{% for item in recenzja %}
 				<tr>	 
-					 <td>{{ item.idRecenzji }}</td> 
-					 <td>{{ item.Tresc }}</td> 
-					 <td>{{ item.Autor }}</td> 
-
+					 <td>{{ item.idrecenzji }}</td> 
+					 <td>{{ item.tytulfilmu|upper }}</td>
+					 <td>{{ item.tresc }}</td> 
+					 <td>{{ item.autor }}</td> 
 				</tr>	 
 			{% endfor %}
 			</tbody>
