@@ -19,14 +19,20 @@
 				<div class="row">
 					<p>
 						Jesteś zalogowany jako {{app.user.username}}. 
-						<a href="{{path('fos_user_security_logout')}}" class="btn btn-primary">Wyloguj</a>
+						<a href="{{path('fos_user_security_logout')}}" class="btn btn-primary">
+							{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+						</a>
 					</p>
 				</div>
 			{% else %}
 				<p>
 					Nie jesteś zalogowany - 
-					<a href="{{path('fos_user_security_login')}}" class="btn btn-primary">Zaloguj</a><br><br>
-					Jeżli nie masz konta - <a href="{{path('fos_user_registration_register')}}" class="btn btn-primary">Zarejestruj się</a><br>
+					<a href="{{path('fos_user_security_login')}}" class="btn btn-primary">
+						{{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+					</a><br><br>
+					Jeżli nie masz konta - <a href="{{path('fos_user_registration_register')}}" class="btn btn-primary">
+						{{ 'layout.register'|trans({}, 'FOSUserBundle') }}
+					</a><br>
 				</p>
 			{% endif %}
 			
