@@ -7,6 +7,11 @@ uek_demo_recenzja_index:
     defaults:
         _controller: UekDemoBundle:Recenzja:index
 
+uek_demo_recenzja_create:
+    path:     /recenzja/create
+    defaults:
+        _controller: UekDemoBundle:Recenzja:create
+
 uek_demo_filmy_index:
     path:     /filmy/index
     defaults:

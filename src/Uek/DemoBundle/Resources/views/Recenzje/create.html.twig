@@ -1,0 +1,26 @@
+{% extends 'UekDemoBundle::bars.html.twig' %}
+
+
+{% block header %}
+	<h1>Dodaj recenzje</h1>
+{% endblock %}
+
+{% block content %}
+	<form class="form-horizontal" method="POST">
+		{% block form_row %}
+				{% for item in form.children %}
+					{% if 'token' in item.vars.name %}
+						{{ form_widget(item) }}
+					{% elseif item.vars.name == 'save' %}
+						{{ form_label(item) }}
+				        {{ form_widget(item) }}
+					{% else %}
+			    		<div class="form-group">
+					        {{ form_label(item) }}
+					        {{ form_widget(item, {'attr': {'class': attr.class|default('') ~ 'form-control'}}) }}
+					    </div>
+					{% endif %}
+				{% endfor %}
+		{% endblock form_row %}
+	</form>
+{% endblock %}
