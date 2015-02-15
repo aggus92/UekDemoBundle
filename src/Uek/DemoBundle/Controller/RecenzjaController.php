@@ -29,29 +29,37 @@ class RecenzjaController extends Controller
 	
 	public function createAction(Request $request)
 	{
-		$recenzje = new Recenzje();
 		
-		$form = $this->createForm(
-			new RecenzjaType(),
-			$recenzje
-		);
 		
-		if ($request->isMethod('POST')
-		&& $form->handleRequest($request)
-		&& $form->isValid()
-		) {
-			$em = $this->getDoctrine()->getManager();
-			$em->persist($recenzje);
-			$em->flush();
+		if ($this->getUser() == null)
+		{
+			return $this->redirect($this->generateUrl('fos_user_security_login', array()));
+		} else {
+			
+			$recenzje = new Recenzje();
+			$recenzje->setAutor($this->getUser()->getUsername());
+			$form = $this->createForm(
+				new RecenzjaType(),
+				$recenzje
+			);
+		
+			if ($request->isMethod('POST')
+				&& $form->handleRequest($request)
+				&& $form->isValid()
+				) {
+					$em = $this->getDoctrine()->getManager();
+					$em->persist($recenzje);
+					$em->flush();
+						return $this->redirect($this->generateUrl('uek_demo_homepage', array()));
+			}
+		
+			return $this->render(
+				'UekDemoBundle:Recenzje:create.html.twig',
+				array(
+					'form' => $form->createView(),
+				)
+			);
 		}
-		
-		return $this->render(
-			'UekDemoBundle:Recenzje:create.html.twig',
-			array(
-				'form' => $form->createView(),
-			)
-		);
-		
 		
 	}
 	
