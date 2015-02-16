@@ -15,14 +15,16 @@
 						<th>IdWypożyczenia</th> 
 						<th>Tytuł</th>  
 						<th>Opłata</th>
+						<th>Nazwa użytkownika</th>
 					</tr>  
 				</thead>  
 			<tbody>
 			{% for item in wypozyczenia %}
 				<tr>	 
 					 <td>{{ item.idwypozyczenia }}</td> 
-					 <td>{{ item.tytul|upper }}</td>
+					 <td>{{ item.tytulfilmu|upper }}</td>
 					 <td>{{ item.oplata }}</td> 
+					 <td>{{ item.username }}</td> 
 				</tr>	 
 			{% endfor %}
 			</tbody>

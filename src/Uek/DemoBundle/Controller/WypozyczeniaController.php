@@ -4,7 +4,6 @@ namespace Uek\DemoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Uek\DemoBundle\Entity\Wypozyczenia;
-use Uek\DemoBundle\Form\RecenzjaType;
 use Symfony\Component\HttpFoundation\Request;
 
 class WypozyczeniaController extends Controller
@@ -17,9 +16,12 @@ class WypozyczeniaController extends Controller
 			return $this->redirect($this->generateUrl('fos_user_security_login', array()));
 			
 		} else {
+			
+			$uzytkownik = $this->getUser()->getUsername();
+			
 			$em = $this->getDoctrine()->getManager();
 			$query = $em->createQuery(
-				'SELECT w.idwypozyczenia, f.tytulfilmu, f.oplata FROM UekDemoBundle:Wypozyczenia w JOIN UekDemoBundle:Filmy f WHERE f.idfilmu = w.idfilmu'
+				'SELECT f.tytulfilmu, f.oplata, w.idwypozyczenia, u.username FROM UekDemoBundle:Filmy f JOIN UekDemoBundle:Wypozyczenia w WHERE f.idfilmu = w.idfilmu JOIN UekDemoBundle:User u WHERE w.iduzytkownika = u.id'
 			);
 
 			$wypozyczenia = $query->getResult();
