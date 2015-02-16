@@ -17,13 +17,17 @@ class WypozyczeniaController extends Controller
 			
 		} else {
 			
-			$uzytkownik = $this->getUser()->getUsername();
-			
+			$uzytkownik = $this->getUser()->getId();
+		
 			$em = $this->getDoctrine()->getManager();
+			
 			$query = $em->createQuery(
-				'SELECT f.tytulfilmu, f.oplata, w.idwypozyczenia, u.username FROM UekDemoBundle:Filmy f JOIN UekDemoBundle:Wypozyczenia w WHERE f.idfilmu = w.idfilmu JOIN UekDemoBundle:User u WHERE w.iduzytkownika = u.id'
-			);
-
+				'SELECT f.tytulfilmu, f.oplata, w.idwypozyczenia, u.username FROM UekDemoBundle:Filmy f 
+				JOIN UekDemoBundle:Wypozyczenia w WHERE f.idfilmu = w.idfilmu JOIN UekDemoBundle:User u 
+				WHERE w.iduzytkownika = u.id WHERE u.id = :id'
+			)
+			->setParameter('id', $uzytkownik);
+	
 			$wypozyczenia = $query->getResult();
 	
 			return $this->render(
