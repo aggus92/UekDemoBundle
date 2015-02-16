@@ -26,3 +26,8 @@ uek_demo_wypozyczenia_index:
     path:     /wypozyczenia/index
     defaults:
         _controller: UekDemoBundle:Wypozyczenia:index
+		
+uek_demo_recenzjaNajwiecej_index:
+    path:     /najczesciejRecenzje/index
+    defaults:
+        _controller: UekDemoBundle:NajczesciejRecenzje:index

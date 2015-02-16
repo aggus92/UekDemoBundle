@@ -13,7 +13,7 @@ class RecenzjaController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery(
-			'SELECT r.idrecenzji, f.tytulfilmu, r.tresc, r.autor FROM UekDemoBundle:Recenzje r JOIN UekDemoBundle:Filmy f WHERE f.idfilmu = r.idfilmu'
+			'SELECT r.idrecenzji, f.tytulfilmu, r.tresc, r.autor FROM UekDemoBundle:Recenzje r JOIN UekDemoBundle:Filmy f WHERE f.idfilmu = r.idfilmu ORDER BY r.idrecenzji'
 		);
 
 		$recenzja = $query->getResult();
