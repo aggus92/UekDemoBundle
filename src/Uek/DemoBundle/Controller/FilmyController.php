@@ -23,4 +23,25 @@ class FilmyController extends Controller
 		);
 	}
 	
+	public function showAction($gatunek)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$query = $em->createQuery(
+			'SELECT f.tytulfilmu, f.opis, f.oplata FROM UekDemoBundle:Filmy f 
+			JOIN f.gatunek fg
+			WHERE fg.gatunek = :gatunek'
+		)
+		->setParameter('gatunek', $gatunek);
+
+		$filmy = $query->getResult();
+		
+		return $this->render(
+				'UekDemoBundle:Filmy:show.html.twig',
+				array(
+					'filmy' => $filmy
+				
+				)
+			);
+	}
+	
 }

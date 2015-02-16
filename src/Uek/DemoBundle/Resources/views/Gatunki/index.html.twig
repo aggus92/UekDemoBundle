@@ -15,7 +15,7 @@
 			<tbody>
 			{% for item in gatunki %}
 				<tr>	 
-					 <td>{{ item.gatunek }}</td> 
+					 <td><a href="{{path('uek_demo_filmy_show', {'gatunek': item.gatunek})}}">{{ item.gatunek }}</a></td> 
 				</tr>	 
 			{% endfor %}
 			</tbody>

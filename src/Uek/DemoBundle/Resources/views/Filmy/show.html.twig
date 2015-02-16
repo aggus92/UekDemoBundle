@@ -7,24 +7,22 @@
 
 	<div class="panel-body">
 		{% if filmy|length == 0 %}
-			<div class="alert alert-info" role="alert">Nikt jeszcze nie dodał filmów</div>
+			<div class="alert alert-info" role="alert">Nie ma filmów w tym gatunku</div>
 			{% else %}
 			<table class="table table-hover">
 				<thead>  
 					<tr>  
-						<th>IdFilmu</th>  
-						<th>Tutuł</th>  
-						<th>Opis</th>
-						<th>Cena</th>
+						<th>Tytuł filmu</th>  
+						<th>Opis</th> 
+						<th>Opłata</th> 
 					</tr>  
 				</thead>  
 			<tbody>
 			{% for item in filmy %}
 				<tr>	 
-					 <td>{{ item.idFilmu }}</td> 
-					 <td>{{ item.TytulFilmu|upper }}</td> 
-					 <td>{{ item.Opis }}</td> 
-					 <td>{{ item.oplata }}</td>
+					<td>{{ item.tytulfilmu|upper }}</td> 
+					<td>{{ item.opis }}</td> 
+					<td>{{ item.oplata }}</td>
 				</tr>	 
 			{% endfor %}
 			</tbody>
