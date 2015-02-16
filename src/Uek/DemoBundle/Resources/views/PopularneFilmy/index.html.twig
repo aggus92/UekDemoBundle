@@ -1,12 +1,12 @@
 {% extends "UekDemoBundle::bars.html.twig" %}
 
 {% block header %}
-	<h1>Najczęściej Recenzowane Filmy</h1>
+	<h1>Najpopularniejsze Filmy</h1>
 {% endblock %}
 {% block content %}
 
 	<div class="panel-body">
-		{% if recenzjaNajwiecej|length == 0 %}
+		{% if popularneFilmy|length == 0 %}
 			<div class="alert alert-info" role="alert">Nikt jeszcze nie dodał recenzji do filmów</div>
 		{% else %}
 			<table class="table table-hover">
@@ -14,15 +14,15 @@
 					<tr>  
 						<th>IdFilmu</th> 
 						<th>Tytuł</th>
-						<th>Ilość recenzji</th>
+						<th>Ilość wypożyczeń</th>
 					</tr>  
 				</thead>  
 				<tbody>
-					{% for item in recenzjaNajwiecej %}
+					{% for item in popularneFilmy %}
 						<tr>	 
-							 <td>{{ item.idfilmu }}</td> 
-							 <td>{{ item.tytulfilmu|upper }}</td>
-							 <td>{{ item.ilosc }}</td> 
+							<td>{{ item.idfilmu }}</td> 
+							<td>{{ item.tytulfilmu|upper }}</td>
+							<td>{{ item.ilosc }}</td> 
 						</tr>	 
 					{% endfor %}
 				</tbody>
