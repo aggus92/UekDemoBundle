@@ -27,5 +27,7 @@
 					<img src="{{asset('bundles/uekdemo/images/' ~ film.tytulfilmu ~ '.jpg')}}" alt="filmy" class="img-thumbnail">
 				</a>
 			</div>
+			
+			<a href="{{path('uek_demo_koszyk_show', {'idfilmu': film.idFilmu})}}" class="btn btn-primary moja-klasa"><span>Dodaj film do koszyka</span></a>
 	</div>
 {% endblock %}

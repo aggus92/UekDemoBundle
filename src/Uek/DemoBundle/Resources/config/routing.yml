@@ -46,3 +46,13 @@ uek_demo_popularneFilmy_index:
     path:     /popularneFilmy/index
     defaults:
         _controller: UekDemoBundle:PopularneFilmy:index
+
+uek_demo_koszyk_index:
+    path:     /koszyk/index
+    defaults:
+        _controller: UekDemoBundle:Koszyk:index
+
+uek_demo_koszyk_show:
+    path:     /koszyk/show/{idfilmu}
+    defaults:
+        _controller: UekDemoBundle:Koszyk:show

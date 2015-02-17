@@ -1,0 +1,33 @@
+{% extends "UekDemoBundle::bars.html.twig" %}
+
+{% block header %}
+	<h1>Twój Koszyk</h1>
+{% endblock %}
+{% block content %}
+
+	<div class="panel-body">
+		{% if koszyk|length == 0 %}
+			<div class="alert alert-info" role="alert">Nie ma filmów w koszyku</div>
+		{% else %}
+			<table class="table table-hover">
+				<thead>  
+					<tr>  
+						<th>Tytuł filmu</th>   
+						<th>Opłata</th> 
+					</tr>  
+				</thead>  
+				<tbody>
+					{% for item in koszyk %}
+						<tr>	 
+							<td><a href="{{path('uek_demo_filmy_see', {'id': item.idfilmu})}}">{{ item.tytulfilmu|upper }}</a></td> 
+							<td>{{ item.oplata }}</td> 
+						</tr>	 
+					{% endfor %}
+				</tbody>
+			</table>
+			
+			<a href="{{path('uek_demo_filmy_index')}}" class="btn btn-primary moja-klasa"><span>Powrót do wypożyczalni</span></a>
+			
+		{% endif %}
+	</div>
+{% endblock %}
