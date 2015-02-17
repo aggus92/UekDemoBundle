@@ -4,6 +4,7 @@ namespace Uek\DemoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Uek\DemoBundle\Entity\Filmy;
+use Uek\DemoBundle\Entity\Aktorzy;
 use Symfony\Component\HttpFoundation\Request;
 
 class FilmyController extends Controller
@@ -40,6 +41,29 @@ class FilmyController extends Controller
 				array(
 					'filmy' => $filmy
 				
+				)
+			);
+	}
+	
+	public function seeAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$film = $em->getRepository("UekDemoBundle:Filmy")->findOneByIdfilmu($id);
+		
+		$query2 = $em->createQuery(
+			'SELECT a.nazwiskoaktora, a.imieaktora FROM UekDemoBundle:Aktorzy a 
+			JOIN a.idfilmu f
+			WHERE f.idfilmu = :id'
+		)
+		->setParameter('id', $id);
+
+		$aktor = $query2->getResult();
+				
+		return $this->render(
+				'UekDemoBundle:Filmy:see.html.twig',
+				array(
+					'film' => $film,
+					'aktor' => $aktor
 				)
 			);
 	}
