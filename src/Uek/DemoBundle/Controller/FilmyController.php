@@ -28,7 +28,7 @@ class FilmyController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery(
-			'SELECT f.tytulfilmu, f.opis, f.oplata FROM UekDemoBundle:Filmy f 
+			'SELECT f. idfilmu, f.tytulfilmu, f.opis, f.oplata FROM UekDemoBundle:Filmy f 
 			JOIN f.gatunek fg
 			WHERE fg.gatunek = :gatunek'
 		)
@@ -51,7 +51,7 @@ class FilmyController extends Controller
 		$film = $em->getRepository("UekDemoBundle:Filmy")->findOneByIdfilmu($id);
 		
 		$query2 = $em->createQuery(
-			'SELECT a.nazwiskoaktora, a.imieaktora FROM UekDemoBundle:Aktorzy a 
+			'SELECT f.idfilmu, a.nazwiskoaktora, a.imieaktora FROM UekDemoBundle:Aktorzy a 
 			JOIN a.idfilmu f
 			WHERE f.idfilmu = :id'
 		)

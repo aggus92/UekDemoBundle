@@ -18,12 +18,14 @@
 			</dl>
 		{% for item in aktor %}
 			<dl class="dl-horizontal">
-				<dd>{{ item.nazwiskoaktora }} {{ item.imieaktora }}</dd>
+				<dd>{{ item.imieaktora }} {{ item.nazwiskoaktora }}</dd>
 			</dl>
 		{% endfor %}
 						
 			<div class="col-xs-12 col-md-6">
-				<img src="{{asset('bundles/uekdemo/images/' ~ film.tytulfilmu ~ '.jpg')}}" alt="filmy" class="img-thumbnail">
+				<a href="{{path('uek_demo_filmy_see', {'id': film.idFilmu})}}">
+					<img src="{{asset('bundles/uekdemo/images/' ~ film.tytulfilmu ~ '.jpg')}}" alt="filmy" class="img-thumbnail">
+				</a>
 			</div>
 	</div>
 {% endblock %}

@@ -20,7 +20,7 @@
 			<tbody>
 			{% for item in filmy %}
 				<tr>	 
-					<td>{{ item.tytulfilmu|upper }}</td> 
+					<td><a href="{{path('uek_demo_filmy_see', {'id': item.idfilmu})}}">{{ item.tytulfilmu|upper }}</a></td> 
 					<td>{{ item.opis }}</td> 
 					<td>{{ item.oplata }}</td>
 				</tr>	 
