@@ -24,5 +24,5 @@ class PopularneFilmyController extends Controller
 				
 			)
 		);
-	}	
+	}
 }
