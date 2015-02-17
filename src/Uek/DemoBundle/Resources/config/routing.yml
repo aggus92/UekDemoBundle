@@ -22,6 +22,11 @@ uek_demo_filmy_show:
     defaults:
         _controller: UekDemoBundle:Filmy:show	
 
+uek_demo_filmy_see:
+    path:     /filmy/see/{id}
+    defaults:
+        _controller: UekDemoBundle:Filmy:see
+
 uek_demo_gatunki_index:
     path:     /gatunki/index
     defaults:

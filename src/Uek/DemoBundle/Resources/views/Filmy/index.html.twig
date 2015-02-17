@@ -22,7 +22,7 @@
 			{% for item in filmy %}
 				<tr>	 
 					 <td>{{ item.idFilmu }}</td> 
-					 <td>{{ item.TytulFilmu|upper }}</td> 
+					 <td><a href="{{path('uek_demo_filmy_see', {'id': item.idFilmu})}}">{{ item.TytulFilmu|upper }}</a></td> 
 					 <td>{{ item.Opis }}</td> 
 					 <td>{{ item.oplata }}</td>
 				</tr>	 
