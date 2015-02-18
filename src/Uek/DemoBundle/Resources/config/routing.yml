@@ -56,3 +56,8 @@ uek_demo_koszyk_show:
     path:     /koszyk/show/{idfilmu}
     defaults:
         _controller: UekDemoBundle:Koszyk:show
+
+uek_demo_koszyk_add:
+    path:     /koszyk/add/{idfilmu}
+    defaults:
+        _controller: UekDemoBundle:Koszyk:add

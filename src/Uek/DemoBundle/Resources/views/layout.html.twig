@@ -9,6 +9,15 @@
 	</head>
 	<body>
 		<div class="container">
+			<div class="header">
+				<nav>
+					<ul class="nav nav-pills pull-right">
+						{% block header2 %}
+						{% endblock %}						
+					</ul>
+				</nav>
+				<h1><a href="{{path('uek_demo_homepage')}}">Wypożyczalnia filmów</a></h1>
+			</div>
 			<header class="row">
 				<div class="page-header text-uppercase">
 					{% block header %}

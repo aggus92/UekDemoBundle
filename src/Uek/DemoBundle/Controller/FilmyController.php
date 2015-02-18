@@ -28,7 +28,7 @@ class FilmyController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery(
-			'SELECT f. idfilmu, f.tytulfilmu, f.opis, f.oplata FROM UekDemoBundle:Filmy f 
+			'SELECT f.idfilmu, f.tytulfilmu, f.opis, f.oplata FROM UekDemoBundle:Filmy f 
 			JOIN f.gatunek fg
 			WHERE fg.gatunek = :gatunek'
 		)

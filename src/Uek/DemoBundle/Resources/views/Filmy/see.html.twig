@@ -1,7 +1,7 @@
 {% extends "UekDemoBundle::bars.html.twig" %}
 
 {% block header %}
-	<h1>Film - {{ film.tytulfilmu }} </h1>
+	<h3>Film - {{ film.tytulfilmu }} </h3>
 {% endblock %}
 {% block content %}
 	<div class="panel-body">
@@ -28,6 +28,6 @@
 				</a>
 			</div>
 			
-			<a href="{{path('uek_demo_koszyk_show', {'idfilmu': film.idFilmu})}}" class="btn btn-primary moja-klasa"><span>Dodaj film do koszyka</span></a>
+			<a href="{{path('uek_demo_koszyk_add', {'idfilmu': film.idFilmu})}}" class="btn btn-primary moja-klasa"><span>Dodaj film do koszyka</span></a>
 	</div>
 {% endblock %}
