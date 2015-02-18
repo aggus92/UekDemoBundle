@@ -3,6 +3,7 @@
 {% block header %}
 	<h3>Twój Koszyk</h3>
 {% endblock %}
+
 {% block content %}
 
 	<div class="panel-body">
@@ -13,23 +14,21 @@
 				<thead>  
 					<tr>  
 						<th>Tytuł filmu</th>   
-						<th>Opłata</th>
-						<th></th>
+						<th>Opłata</th> 
 					</tr>  
 				</thead>  
 				<tbody>
 					{% for item in koszyk %}
 						<tr>	 
 							<td><a href="{{path('uek_demo_filmy_see', {'id': item.idfilmu})}}">{{ item.tytulfilmu|upper }}</a></td> 
-							<td>{{ item.oplata }}</td>
-							<td><a href="{{path('uek_demo_koszyk_delete', {'idfilmu': item.idfilmu})}}" class="btn btn-primary btn-log"><span> Usuń</span></a></td>
-						</button>
-						</tr>
+							<td>{{ item.oplata }}</td> 
+						</tr>	 
 					{% endfor %}
 				</tbody>
 			</table>
+			
 			<a href="{{path('uek_demo_filmy_index')}}" class="btn btn-primary moja-klasa"><span>Powrót do wypożyczalni</span></a>
-			<div class="pull-right"><a href="{{path('uek_demo_koszyk_clean')}}" class="btn btn-primary moja-klasa"><span>Opróżnij koszyk</span></a></div>
+			
 		{% endif %}
 	</div>
 {% endblock %}
