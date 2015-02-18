@@ -67,7 +67,7 @@ class KoszykController extends Controller
 			$koszyk = new Koszyk();
 			$koszyk->setUzytkownik($this->getUser()->getUsername());
 			$em = $this->getDoctrine()->getManager();
-			$film = $em->getRepository("UekDemoBundle:Filmy")->findOneBydfilmu($idfilmu);
+			$film = $em->getRepository("UekDemoBundle:Filmy")->findOneByIdfilmu($idfilmu);
 			$koszyk->setIdfilmu($film->getIdfilmu());
 		
 //			if ($request->isMethod('POST'))
