@@ -16,6 +16,7 @@
 						<th>Tutuł</th>  
 						<th>Opis</th>
 						<th>Cena</th>
+						<th>Okładka</th>
 					</tr>  
 				</thead>  
 			<tbody>
@@ -25,6 +26,11 @@
 					 <td><a href="{{path('uek_demo_filmy_see', {'id': item.idFilmu})}}">{{ item.TytulFilmu|upper }}</a></td> 
 					 <td>{{ item.Opis }}</td> 
 					 <td>{{ item.oplata }}</td>
+					 <td>
+						<a href="{{path('uek_demo_filmy_see', {'id': item.idFilmu})}}">
+							<img src="{{asset('bundles/uekdemo/images/' ~ item.TytulFilmu ~ '.jpg')}}" alt="filmy" class="img-responsive" width="40" height="10">
+						</a>
+					</td>
 				</tr>	 
 			{% endfor %}
 			</tbody>
