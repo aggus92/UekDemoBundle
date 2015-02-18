@@ -11,50 +11,30 @@ class KoszykController extends Controller
 
 	public function indexAction() 
 	{
-		$uzytkownik = $this->getUser()->getUsername();
-		$em = $this->getDoctrine()->getManager();
-				
-		$query = $em->createQuery(
-			'SELECT f.tytulfilmu, f.oplata, k.uzytkownik FROM UekDemoBundle:Filmy f 
-			JOIN UekDemoBundle:Koszyk k WHERE f.idfilmu = k.idfilmu AND k.uzytkownik = :uzytkownik'
-		)
-		->setParameter('uzytkownik', $uzytkownik);
-		
-		$koszyk = $query->getResult();
-			
-		return $this->render(
-			'UekDemoBundle:Koszyk:index.html.twig',
-			array(
-				'koszyk' => $koszyk
-			)
-		);
-	}
-	
-	public function showAction(Request $request)
-	{
-		$uzytkownik = $this->getUser()->getUsername();
 		if ($this->getUser() == null)
 		{
 			$uzytkownik = '';
 			
-		} else {
+		} else
+		{
+			$uzytkownik = $this->getUser()->getUsername();
+		}
 			$em = $this->getDoctrine()->getManager();
+					
 			$query = $em->createQuery(
-				'SELECT f. idfilmu, f.tytulfilmu, f.oplata, k.uzytkownik FROM UekDemoBundle:Filmy f
+				'SELECT f.idfilmu, f.tytulfilmu, f.oplata, k.uzytkownik FROM UekDemoBundle:Filmy f 
 				JOIN UekDemoBundle:Koszyk k WHERE f.idfilmu = k.idfilmu AND k.uzytkownik = :uzytkownik'
 			)
 			->setParameter('uzytkownik', $uzytkownik);
-
-			$koszyk = $query->getResult();
 			
+			$koszyk = $query->getResult();
+				
 			return $this->render(
-					'UekDemoBundle:Koszyk:show.html.twig',
-					array(
-						'koszyk' => $koszyk
-					
-					)
-				);
-		}
+				'UekDemoBundle:Koszyk:index.html.twig',
+				array(
+					'koszyk' => $koszyk
+				)
+			);
 	}
 	
 	public function addAction($idfilmu)
@@ -62,26 +42,89 @@ class KoszykController extends Controller
 		if ($this->getUser() == null)
 		{
 			$uzytkownik = '';
+		} else
+		{
+			$uzytkownik = $this->getUser()->getUsername();
 		}
-			
+		
 			$koszyk = new Koszyk();
 			$koszyk->setUzytkownik($this->getUser()->getUsername());
 			$em = $this->getDoctrine()->getManager();
 			$film = $em->getRepository("UekDemoBundle:Filmy")->findOneByIdfilmu($idfilmu);
 			$koszyk->setIdfilmu($film);
 		
-//			if ($request->isMethod('POST'))
-//			{
-					$em = $this->getDoctrine()->getManager();
-					$em->persist($koszyk);
-					$em->flush();
+		$koszyk = new Koszyk();
+		$koszyk->setUzytkownik($uzytkownik);
+		
+		$em = $this->getDoctrine()->getManager();
+		$film = $em->getRepository("UekDemoBundle:Filmy")->findOneByIdfilmu($idfilmu);
+		$koszyk->setIdfilmu($film);
+		
+		$em->persist($koszyk);
+		$em->flush();
 					
-					return $this->redirect($this->generateUrl('uek_demo_koszyk_index'));
-//					return $this->redirect($this->generateUrl('uek_demo_filmy_see', ($koszyk->getIdfilmu())));
-//			}
+		return $this->redirect($this->generateUrl('uek_demo_koszyk_index'));
+
+		return $this->render(
+			'UekDemoBundle:Koszyk:add.html.twig',
+			array(
+				'koszyk' => $koszyk
+			)
+		);	
+	}
+	
+	public function deleteAction($idfilmu)
+	{
+		if ($this->getUser() == null)
+		{
+			$uzytkownik = '';
+		} else
+		{
+			$uzytkownik = $this->getUser()->getUsername();
+		}
 		
-			
+		$em = $this->getDoctrine()->getManager();
+		$film = $em->getRepository("UekDemoBundle:Filmy")->findOneByIdfilmu($idfilmu);
+		$koszyk = $em->getRepository("UekDemoBundle:Koszyk")->findOneBy(array('idfilmu' => $film, 'uzytkownik' => $uzytkownik));
 		
+		$em->remove($koszyk);
+		$em->flush();
+					
+		return $this->redirect($this->generateUrl('uek_demo_koszyk_index'));
+
+		return $this->render(
+			'UekDemoBundle:Koszyk:add.html.twig',
+			array(
+				'koszyk' => $koszyk
+			)
+		);	
+	}
+	
+	public function cleanAction()
+	{
+		if ($this->getUser() == null)
+		{
+			$uzytkownik = '';
+		} else
+		{
+			$uzytkownik = $this->getUser()->getUsername();
+		}
 		
+		$em = $this->getDoctrine()->getManager();
+		
+		$query = $em->createQuery(
+			'DELETE UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
+			)
+			->setParameter('uzytkownik', $uzytkownik);
+		$koszyk = $query->getResult();
+		
+		return $this->redirect($this->generateUrl('uek_demo_koszyk_index'));
+
+		return $this->render(
+			'UekDemoBundle:Koszyk:add.html.twig',
+			array(
+				'koszyk' => $koszyk
+			)
+		);	
 	}
 }

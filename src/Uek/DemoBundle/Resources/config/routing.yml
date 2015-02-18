@@ -52,12 +52,17 @@ uek_demo_koszyk_index:
     defaults:
         _controller: UekDemoBundle:Koszyk:index
 
-uek_demo_koszyk_show:
-    path:     /koszyk/show/{idfilmu}
-    defaults:
-        _controller: UekDemoBundle:Koszyk:show
-
 uek_demo_koszyk_add:
     path:     /koszyk/add/{idfilmu}
     defaults:
         _controller: UekDemoBundle:Koszyk:add
+
+uek_demo_koszyk_delete:
+    path:     /koszyk/delete/{idfilmu}
+    defaults:
+        _controller: UekDemoBundle:Koszyk:delete
+
+uek_demo_koszyk_clean:
+    path:     /koszyk/clean
+    defaults:
+        _controller: UekDemoBundle:Koszyk:clean
