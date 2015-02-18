@@ -68,7 +68,7 @@ class KoszykController extends Controller
 			$koszyk->setUzytkownik($this->getUser()->getUsername());
 			$em = $this->getDoctrine()->getManager();
 			$film = $em->getRepository("UekDemoBundle:Filmy")->findOneByIdfilmu($idfilmu);
-			$koszyk->setIdfilmu($film->getIdfilmu());
+			$koszyk->setIdfilmu($film);
 		
 //			if ($request->isMethod('POST'))
 //			{
@@ -80,12 +80,7 @@ class KoszykController extends Controller
 //					return $this->redirect($this->generateUrl('uek_demo_filmy_see', ($koszyk->getIdfilmu())));
 //			}
 		
-			return $this->render(
-				'UekDemoBundle:Koszyk:add.html.twig',
-				array(
-					'koszyk' => $koszyk
-				)
-			);
+			
 		
 		
 	}
