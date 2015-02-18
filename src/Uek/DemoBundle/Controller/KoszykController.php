@@ -19,22 +19,22 @@ class KoszykController extends Controller
 		{
 			$uzytkownik = $this->getUser()->getUsername();
 		}
-			$em = $this->getDoctrine()->getManager();
-					
-			$query = $em->createQuery(
-				'SELECT f.idfilmu, f.tytulfilmu, f.oplata, k.uzytkownik FROM UekDemoBundle:Filmy f 
-				JOIN UekDemoBundle:Koszyk k WHERE f.idfilmu = k.idfilmu AND k.uzytkownik = :uzytkownik'
-			)
-			->setParameter('uzytkownik', $uzytkownik);
-			
-			$koszyk = $query->getResult();
+		$em = $this->getDoctrine()->getManager();
 				
-			return $this->render(
-				'UekDemoBundle:Koszyk:index.html.twig',
-				array(
-					'koszyk' => $koszyk
-				)
-			);
+		$query = $em->createQuery(
+			'SELECT f.idfilmu, f.tytulfilmu, f.oplata, k.uzytkownik FROM UekDemoBundle:Filmy f 
+			JOIN UekDemoBundle:Koszyk k WHERE f.idfilmu = k.idfilmu AND k.uzytkownik = :uzytkownik'
+		)
+		->setParameter('uzytkownik', $uzytkownik);
+			
+		$koszyk = $query->getResult();
+				
+		return $this->render(
+			'UekDemoBundle:Koszyk:index.html.twig',
+			array(
+				'koszyk' => $koszyk
+			)
+		);
 	}
 	
 	public function addAction($idfilmu)
