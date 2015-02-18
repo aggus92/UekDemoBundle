@@ -20,12 +20,9 @@
 			<dl class="dl-horizontal">
 				<dd>{{ item.imieaktora }} {{ item.nazwiskoaktora }}</dd>
 			</dl>
-		{% endfor %}
-						
+		{% endfor %}			
 			<div class="col-xs-12 col-md-6">
-				<a href="{{path('uek_demo_filmy_see', {'id': film.idFilmu})}}">
-					<img src="{{asset('bundles/uekdemo/images/' ~ film.tytulfilmu ~ '.jpg')}}" alt="filmy" class="img-thumbnail">
-				</a>
+					<img src="{{asset('bundles/uekdemo/images/' ~ film.tytulfilmu ~ '.jpg')}}" alt="filmy" class="img-rounded">
 			</div>
 			
 			<a href="{{path('uek_demo_koszyk_add', {'idfilmu': film.idFilmu})}}" class="btn btn-primary moja-klasa"><span>Dodaj film do koszyka</span></a>
