@@ -47,6 +47,12 @@ class KoszykController extends Controller
 			$uzytkownik = $this->getUser()->getUsername();
 		}
 		
+			$koszyk = new Koszyk();
+			$koszyk->setUzytkownik($this->getUser()->getUsername());
+			$em = $this->getDoctrine()->getManager();
+			$film = $em->getRepository("UekDemoBundle:Filmy")->findOneByIdfilmu($idfilmu);
+			$koszyk->setIdfilmu($film);
+		
 		$koszyk = new Koszyk();
 		$koszyk->setUzytkownik($uzytkownik);
 		
