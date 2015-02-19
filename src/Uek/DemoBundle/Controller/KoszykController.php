@@ -46,7 +46,7 @@ class KoszykController extends Controller
 		{
 			$uzytkownik = $this->getUser()->getUsername();
 		}
-		
+		$dodano = "ok";
 		$koszyk = new Koszyk();
 		$koszyk->setUzytkownik($uzytkownik);
 		
@@ -57,7 +57,7 @@ class KoszykController extends Controller
 		$em->persist($koszyk);
 		$em->flush();
 					
-		return $this->redirect($this->generateUrl('uek_demo_koszyk_index'));
+		return $this->redirect($this->generateUrl('uek_demo_filmy_seeRec', array('id' => $idfilmu, 'recenzja' => $dodano)));
 
 		return $this->render(
 			'UekDemoBundle:Koszyk:add.html.twig',

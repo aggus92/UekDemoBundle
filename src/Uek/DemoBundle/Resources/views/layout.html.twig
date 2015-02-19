@@ -6,18 +6,41 @@
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" type="text/css" href="{{ asset('bundles/uekdemo/css/bootstrap.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('bundles/uekdemo/css/main.css') }}">
+		<style>
+			h3, a, p
+			{
+				color: black;
+			}
+			li
+			{
+				color: midnightblue;
+			}
+			a:hover
+			{
+				color: black;
+				text-decoration: none;
+			}
+			h4
+			{
+				color: black;
+				margin: .67em 0;
+				font-size: 3em;
+				font-family: cursive;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
 			<div class="header">
 				<nav>
 					<ul class="nav nav-pills pull-right">
-						{% block header2 %}
-						<a href="#">Inbox <span class="badge">42</span></a>
-						{% endblock %}						
+						<a href="{{path('uek_demo_koszyk_index')}}" class="btn btn-primary" type="button">Koszyk 
+							{% block main %}
+							{% endblock %}
+						</a>
 					</ul>
 				</nav>
-				<h1><a href="{{path('uek_demo_homepage')}}">Wypożyczalnia filmów</a></h1>
+				<h4><a href="{{path('uek_demo_homepage')}}">Wypożyczalnia filmów</a></h4>
 			</div>
 			<header class="row">
 				<div class="page-header text-uppercase">
@@ -39,8 +62,8 @@
 					Nie jesteś zalogowany - 
 					<a href="{{path('fos_user_security_login')}}" class="btn btn-primary">
 						{{ 'layout.login'|trans({}, 'FOSUserBundle') }}
-					</a><br><br>
-					Jeżli nie masz konta - <a href="{{path('fos_user_registration_register')}}" class="btn btn-primary">
+					</a>
+					Jeżeli nie masz konta - <a href="{{path('fos_user_registration_register')}}" class="btn btn-primary">
 						{{ 'layout.register'|trans({}, 'FOSUserBundle') }}
 					</a><br>
 				</p>

@@ -68,4 +68,28 @@ class FilmyController extends Controller
 			);
 	}
 	
+	public function seeRecAction($id, $recenzja)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$film = $em->getRepository("UekDemoBundle:Filmy")->findOneByIdfilmu($id);
+		
+		$query2 = $em->createQuery(
+			'SELECT f.idfilmu, a.nazwiskoaktora, a.imieaktora FROM UekDemoBundle:Aktorzy a 
+			JOIN a.idfilmu f
+			WHERE f.idfilmu = :id'
+		)
+		->setParameter('id', $id);
+
+		$aktor = $query2->getResult();
+				
+		return $this->render(
+				'UekDemoBundle:Filmy:seeRec.html.twig',
+				array(
+					'film' => $film,
+					'aktor' => $aktor,
+					'recenzja' => $recenzja
+				)
+			);
+	}
+	
 }
