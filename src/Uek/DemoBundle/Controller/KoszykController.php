@@ -20,7 +20,7 @@ class KoszykController extends Controller
 			$uzytkownik = $this->getUser()->getUsername();
 		}
 		$em = $this->getDoctrine()->getManager();
-				
+		
 		$query = $em->createQuery(
 			'SELECT f.idfilmu, f.tytulfilmu, f.oplata, k.uzytkownik FROM UekDemoBundle:Filmy f 
 			JOIN UekDemoBundle:Koszyk k WHERE f.idfilmu = k.idfilmu AND k.uzytkownik = :uzytkownik'
@@ -28,11 +28,19 @@ class KoszykController extends Controller
 		->setParameter('uzytkownik', $uzytkownik);
 			
 		$koszyk = $query->getResult();
-				
+		
+		$queryIlosc = $em->createQuery(
+			'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
+		)
+		->setParameter('uzytkownik', $uzytkownik);
+		
+		$ilosc = $queryIlosc->getResult();
+		
 		return $this->render(
 			'UekDemoBundle:Koszyk:index.html.twig',
 			array(
-				'koszyk' => $koszyk
+				'koszyk' => $koszyk,
+				'ilosc' => $ilosc
 			)
 		);
 	}

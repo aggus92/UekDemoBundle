@@ -1,5 +1,11 @@
 {% extends 'UekDemoBundle::bars.html.twig' %}
 
+{% block main %}
+	{% for item in ilosc %}
+		<span class="badge">{{item.ilosc}}</span>
+	{% endfor %}	
+{% endblock %}
+
 {% block header %}
 	<h3>Dodaj recenzję</h3>
 {% endblock %}

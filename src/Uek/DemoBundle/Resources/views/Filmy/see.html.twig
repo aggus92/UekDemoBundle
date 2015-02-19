@@ -1,7 +1,9 @@
 {% extends "UekDemoBundle::bars.html.twig" %}
 
 {% block main %}
-	<span class="badge">42</span>
+	{% for item in ilosc %}
+		<span class="badge">{{item.ilosc}}</span>
+	{% endfor %}	
 {% endblock %}
 
 {% block header %}

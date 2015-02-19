@@ -4,6 +4,7 @@ namespace Uek\DemoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Uek\DemoBundle\Entity\Recenzje;
+use Uek\DemoBundle\Entity\Koszyk;
 use Uek\DemoBundle\Form\RecenzjaType;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -11,6 +12,15 @@ class RecenzjaController extends Controller
 {
 	public function indexAction() 
 	{
+		if ($this->getUser() == null)
+		{
+			$uzytkownik = '';
+			
+		} else
+		{
+			$uzytkownik = $this->getUser()->getUsername();
+		}
+		
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery(
 			'SELECT f.idfilmu, r.idrecenzji, f.tytulfilmu, r.tresc, r.autor FROM UekDemoBundle:Recenzje r 
@@ -18,11 +28,19 @@ class RecenzjaController extends Controller
 		);
 
 		$recenzja = $query->getResult();
+		
+		$queryIlosc = $em->createQuery(
+			'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
+		)
+		->setParameter('uzytkownik', $uzytkownik);
+		
+		$ilosc = $queryIlosc->getResult();
 	
 		return $this->render(
 			'UekDemoBundle:Recenzje:index.html.twig',
 			array(
-				'recenzja' => $recenzja
+				'recenzja' => $recenzja,
+				'ilosc' => $ilosc
 				
 			)
 		);
@@ -32,9 +50,28 @@ class RecenzjaController extends Controller
 	{	
 		if ($this->getUser() == null)
 		{
-			return $this->redirect($this->generateUrl('fos_user_security_login', array()));
+			$uzytkownik = '';
+			$em = $this->getDoctrine()->getManager();
+			$queryIlosc = $em->createQuery(
+				'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
+			)
+			->setParameter('uzytkownik', $uzytkownik);
+			
+			$ilosc = $queryIlosc->getResult();
+			
+			return $this->redirect($this->generateUrl('fos_user_security_login', array('ilosc' => $ilosc)));
 		} else
 		{
+			$uzytkownik = $this->getUser()->getUsername();
+
+			$em = $this->getDoctrine()->getManager();
+			$queryIlosc = $em->createQuery(
+				'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
+			)
+			->setParameter('uzytkownik', $uzytkownik);
+			
+			$ilosc = $queryIlosc->getResult();
+			
 			$recenzje = new Recenzje();
 			$recenzje->setAutor($this->getUser()->getUsername());
 		
@@ -57,7 +94,8 @@ class RecenzjaController extends Controller
 			return $this->render(
 				'UekDemoBundle:Recenzje:create.html.twig',
 				array(
-					'form' => $form->createView()
+					'form' => $form->createView(),
+					'ilosc' => $ilosc
 				)
 			);
 		}	
@@ -67,14 +105,33 @@ class RecenzjaController extends Controller
 	{	
 		if ($this->getUser() == null)
 		{
-			return $this->redirect($this->generateUrl('fos_user_security_login', array()));
-		} else
+			$uzytkownik = "";
+			$em = $this->getDoctrine()->getManager();
+			$queryIlosc = $em->createQuery(
+				'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
+			)
+			->setParameter('uzytkownik', $uzytkownik);
+			
+			$ilosc = $queryIlosc->getResult();
+			
+			return $this->redirect($this->generateUrl('fos_user_security_login', array('ilosc' => $ilosc)));
+		}
+		else
 		{
+			$uzytkownik = $this->getUser()->getUsername();
 			$dodano = "dodano";
 			$recenzje = new Recenzje();
 			$recenzje->setAutor($this->getUser()->getUsername());
 			
 			$em = $this->getDoctrine()->getManager();
+			
+			$queryIlosc = $em->createQuery(
+				'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
+			)
+			->setParameter('uzytkownik', $uzytkownik);
+			
+			$ilosc = $queryIlosc->getResult();
+			
 			$film = $em->getRepository("UekDemoBundle:Filmy")->findOneByIdfilmu($idfilmu);
 			$recenzje->setIdfilmu($film);
 			
@@ -97,7 +154,8 @@ class RecenzjaController extends Controller
 			return $this->render(
 				'UekDemoBundle:Recenzje:create.html.twig',
 				array(
-					'form' => $form->createView()
+					'form' => $form->createView(),
+					'ilosc' => $ilosc
 				)
 			);
 		}	
