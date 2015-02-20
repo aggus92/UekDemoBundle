@@ -1,10 +1,16 @@
 {% extends "UekDemoBundle::bars.html.twig" %}
 
+{% block main %}
+	{% for item in ilosc %}
+		<span class="badge">{{item.ilosc}}</span>
+	{% endfor %}	
+{% endblock %}
+
 {% block header %}
 	<h3>Lista Filmów</h3>
 {% endblock %}
-{% block content %}
 
+{% block content %}
 	<div class="panel-body">
 		{% if filmy|length == 0 %}
 			<div class="alert alert-info" role="alert">Nikt jeszcze nie dodał filmów</div>

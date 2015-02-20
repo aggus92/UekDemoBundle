@@ -12,6 +12,11 @@ uek_demo_recenzja_create:
     defaults:
         _controller: UekDemoBundle:Recenzja:create
 
+uek_demo_recenzja_add:
+    path:     /recenzja/add/{idfilmu}
+    defaults:
+        _controller: UekDemoBundle:Recenzja:add
+
 uek_demo_filmy_index:
     path:     /filmy/index
     defaults:
@@ -26,6 +31,11 @@ uek_demo_filmy_see:
     path:     /filmy/see/{id}
     defaults:
         _controller: UekDemoBundle:Filmy:see
+
+uek_demo_filmy_seeRec:
+    path:     /filmy/seeRec/{id}_{recenzja}
+    defaults:
+        _controller: UekDemoBundle:Filmy:seeRec
 
 uek_demo_gatunki_index:
     path:     /gatunki/index

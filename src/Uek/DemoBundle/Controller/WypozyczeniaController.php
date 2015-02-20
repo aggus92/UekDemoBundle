@@ -4,6 +4,7 @@ namespace Uek\DemoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Uek\DemoBundle\Entity\Wypozyczenia;
+use Uek\DemoBundle\Entity\Koszyk;
 use Symfony\Component\HttpFoundation\Request;
 
 class WypozyczeniaController extends Controller
@@ -13,9 +14,27 @@ class WypozyczeniaController extends Controller
 		
 		if ($this->getUser() == null)
 		{
-			return $this->redirect($this->generateUrl('fos_user_security_login', array()));
+			$uzytkownik = "";
+			$em = $this->getDoctrine()->getManager();
+			$queryIlosc = $em->createQuery(
+				'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
+			)
+			->setParameter('uzytkownik', $uzytkownik);
+			
+			$ilosc = $queryIlosc->getResult();
+			
+			return $this->redirect($this->generateUrl('fos_user_security_login', array('ilosc' => $ilosc)));
 			
 		} else {
+			
+			if ($this->getUser() == null)
+			{
+				$uzytkownik2 = '';
+				
+			} else
+			{
+				$uzytkownik2 = $this->getUser()->getUsername();
+			}
 			
 			$uzytkownik = $this->getUser()->getId();
 		
@@ -30,11 +49,18 @@ class WypozyczeniaController extends Controller
 	
 			$wypozyczenia = $query->getResult();
 	
+			$queryIlosc = $em->createQuery(
+				'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik2'
+			)
+			->setParameter('uzytkownik2', $uzytkownik2);
+		
+			$ilosc = $queryIlosc->getResult();
+			
 			return $this->render(
 				'UekDemoBundle:Wypozyczenia:index.html.twig',
 				array(
-					'wypozyczenia' => $wypozyczenia
-				
+					'wypozyczenia' => $wypozyczenia,
+					'ilosc' => $ilosc
 				)
 			);
 		}

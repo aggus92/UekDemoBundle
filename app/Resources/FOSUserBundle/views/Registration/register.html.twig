@@ -1,9 +1,9 @@
 {% extends "UekDemoBundle::bars.html.twig" %}
 
 {% block header %}
-	<h1>Rejestracja</h1>
+	<h3>Rejestracja</h3>
 {% endblock %}
 
 {% block fos_user_content %}
-{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+	{% include "FOSUserBundle:Registration:register_content.html.twig" %}
 {% endblock fos_user_content %}
