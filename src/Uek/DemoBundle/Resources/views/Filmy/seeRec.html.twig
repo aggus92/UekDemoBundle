@@ -11,9 +11,19 @@
 		<div class="col-md-8">
 			<h3>Film - {{ film.tytulfilmu }} </h3>
 		</div>
+		
+		{% if recenzja == 'dodano' %}
+			<div class="col-md-4">
+				<div class="alert alert-success" role="alert">Dodano recenzję</div>
+			</div>
+		{% else %}
+			<div class="col-md-4">
+				<div class="alert alert-success" role="alert">Dodano do koszyka</div>
+			</div>
+		{% endif %}
+		
 	</div>
 {% endblock %}
-
 {% block content %}
 	<div class="panel-body">
 			<dl class="dl-horizontal">

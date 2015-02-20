@@ -22,7 +22,7 @@ class RecenzjaType extends AbstractType
 			'label' => 'Tytuł filmu',
 			))
 			->add('save', 'submit', array(
-			'label' => 'Dodaj recenzje',
+			'label' => 'Dodaj recenzję',
 			'attr' => array(
 				'class' => 'btn btn-primary'
 				)
