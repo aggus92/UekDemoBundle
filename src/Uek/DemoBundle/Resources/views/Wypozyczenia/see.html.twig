@@ -1,0 +1,10 @@
+{% extends "UekDemoBundle::bars.html.twig" %}
+
+{% block header %}
+	<h3>Oglądasz zwiastun - {{ tytul }}</h3>
+{% endblock %}
+{% block content %}
+	<video height="400" width="600" controls="controls">
+		<source src="{{asset('bundles/uekdemo/video/' ~ tytul ~ '.mp4')}}" type="video/mp4">
+	</video>
+{% endblock %}

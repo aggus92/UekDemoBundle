@@ -40,4 +40,13 @@ class WypozyczeniaController extends Controller
 		}
 	}
 	
+	public function seeAction($tytulfilmu)
+	{
+		 return $this->render('UekDemoBundle:Wypozyczenia:see.html.twig', 
+		 array(
+			'tytul' => $tytulfilmu
+			)
+		);
+	}
+	
 }
