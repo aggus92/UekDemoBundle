@@ -5,12 +5,13 @@ namespace Uek\DemoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Uek\DemoBundle\Entity\Recenzje;
 use Uek\DemoBundle\Entity\Koszyk;
+use Uek\DemoBundle\Entity\Filmy;
 use Uek\DemoBundle\Form\RecenzjaType;
 use Symfony\Component\HttpFoundation\Request;
 
 class RecenzjaController extends Controller
 {
-	public function indexAction() 
+	public function indexAction($id) 
 	{
 		if ($this->getUser() == null)
 		{
@@ -22,24 +23,23 @@ class RecenzjaController extends Controller
 		}
 		
 		$em = $this->getDoctrine()->getManager();
-		$query = $em->createQuery(
-			'SELECT f.idfilmu, r.idrecenzji, f.tytulfilmu, r.tresc, r.autor FROM UekDemoBundle:Recenzje r 
-			JOIN UekDemoBundle:Filmy f WHERE f.idfilmu = r.idfilmu ORDER BY r.idrecenzji'
-		);
-
-		$recenzja = $query->getResult();
-		
+	
 		$queryIlosc = $em->createQuery(
 			'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
 		)
 		->setParameter('uzytkownik', $uzytkownik);
 		
 		$ilosc = $queryIlosc->getResult();
+		
+		$recenzja = $em->getRepository("UekDemoBundle:Recenzje");
+		$filmy = $em->getRepository("UekDemoBundle:Filmy")->findAll();
+		$recenzje = $recenzja->findByIdfilmu($id);
 	
 		return $this->render(
 			'UekDemoBundle:Recenzje:index.html.twig',
 			array(
-				'recenzja' => $recenzja,
+				'recenzja' => $recenzje,
+				'filmy' => $filmy,
 				'ilosc' => $ilosc
 				
 			)

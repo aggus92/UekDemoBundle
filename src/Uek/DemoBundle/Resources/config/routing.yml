@@ -3,9 +3,10 @@ uek_demo_homepage:
     defaults: { _controller: UekDemoBundle:Default:index }
 
 uek_demo_recenzja_index:
-    path:     /recenzja/index
+    path:     /recenzja/index{id}
     defaults:
         _controller: UekDemoBundle:Recenzja:index
+        id: 1
 
 uek_demo_recenzja_create:
     path:     /recenzja/create
