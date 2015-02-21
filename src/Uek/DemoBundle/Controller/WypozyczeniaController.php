@@ -75,4 +75,9 @@ class WypozyczeniaController extends Controller
 		);
 	}
 	
+	public function createAction()
+	{
+		
+	}
+	
 }

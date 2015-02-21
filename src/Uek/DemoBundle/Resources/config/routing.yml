@@ -53,6 +53,11 @@ uek_demo_wypozyczenia_see:
     defaults:
         _controller: UekDemoBundle:Wypozyczenia:see
 
+uek_demo_wypozyczenia_create:
+    path:     /wypozyczenia/create
+    defaults:
+        _controller: UekDemoBundle:Wypozyczenia:create
+
 uek_demo_recenzjaNajwiecej_index:
     path:     /najczesciejRecenzje/index
     defaults:

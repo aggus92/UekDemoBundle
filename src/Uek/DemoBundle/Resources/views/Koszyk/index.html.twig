@@ -28,13 +28,14 @@
 						<tr>	 
 							<td><a href="{{path('uek_demo_filmy_see', {'id': item.idfilmu})}}">{{ item.tytulfilmu|upper }}</a></td> 
 							<td>{{ item.oplata }}</td>
-							<td><a href="{{path('uek_demo_koszyk_delete', {'idfilmu': item.idfilmu})}}" class="btn btn-primary btn-log"><span> Usuń</span></a></td>
+							<td><a href="{{path('uek_demo_koszyk_delete', {'idfilmu': item.idfilmu})}}" class="btn btn-default btn-log"><span> Usuń</span></a></td>
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
-			<a href="{{path('uek_demo_filmy_index')}}" class="btn btn-primary moja-klasa"><span>Powrót do wypożyczalni</span></a>
-			<div class="pull-right"><a href="{{path('uek_demo_koszyk_clean')}}" class="btn btn-primary moja-klasa"><span>Opróżnij koszyk</span></a></div>
+			<a href="{{path('uek_demo_filmy_index')}}" class="btn btn-default moja-klasa"><span>Powrót do wypożyczalni</span></a>
+			<a href="{{path('uek_demo_koszyk_clean')}}" class="btn btn-default moja-klasa"><span>Opróżnij koszyk</span></a>
+			<div class="pull-right"><a href="{{path('uek_demo_wypozyczenia_create')}}" class="btn btn-primary moja-klasa"><span>Wypożycz</span></a></div>
 		{% endif %}
 	</div>
 {% endblock %}
