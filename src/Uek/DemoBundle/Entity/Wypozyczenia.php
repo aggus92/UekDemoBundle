@@ -59,7 +59,7 @@ class Wypozyczenia
      * @param \Uek\DemoBundle\Entity\FosUser $iduzytkownika
      * @return Wypozyczenia
      */
-    public function setIduzytkownika(\Uek\DemoBundle\Entity\FosUser $iduzytkownika = null)
+    public function setIduzytkownika(\Uek\DemoBundle\Entity\User $iduzytkownika = null)
     {
         $this->iduzytkownika = $iduzytkownika;
 
