@@ -31,6 +31,13 @@ class RecenzjaController extends Controller
 		
 		$ilosc = $queryIlosc->getResult();
 		
+		$queryTytul = $em->createQuery(
+			'SELECT f.tytulfilmu FROM UekDemoBundle:Filmy f WHERE f.idfilmu = :id'
+		)
+		->setParameter('id', $id);
+		
+		$tytul = $queryTytul->getResult();
+		
 		$recenzja = $em->getRepository("UekDemoBundle:Recenzje");
 		$filmy = $em->getRepository("UekDemoBundle:Filmy")->findAll();
 		$recenzje = $recenzja->findByIdfilmu($id);
@@ -40,8 +47,8 @@ class RecenzjaController extends Controller
 			array(
 				'recenzja' => $recenzje,
 				'filmy' => $filmy,
-				'ilosc' => $ilosc
-				
+				'ilosc' => $ilosc,
+				'tytul' => $tytul
 			)
 		);
 	}

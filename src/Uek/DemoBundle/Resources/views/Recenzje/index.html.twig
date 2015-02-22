@@ -17,7 +17,13 @@
 			{'id': filmy.idfilmu})}}">{{ filmy.tytulfilmu }}</a>
 		{% endfor %}
 	</div>
+	
 	<div class="panel-body">
+		<div>
+			{% for tytul in tytul %}
+				<span class="label label-default">Recenzje filmu: {{ tytul.tytulfilmu }}</span>
+			{% endfor %}
+		</div>
 		{% if recenzja|length == 0 %}
 			<div class="alert alert-info" role="alert">Nikt jeszcze nie dodał recenzji do tego filmu</div>
 			{% else %}
