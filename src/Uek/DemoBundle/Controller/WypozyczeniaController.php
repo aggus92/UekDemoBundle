@@ -14,28 +14,12 @@ class WypozyczeniaController extends Controller
 		
 		if ($this->getUser() == null)
 		{
-			$uzytkownik = "";
-			$em = $this->getDoctrine()->getManager();
-			$queryIlosc = $em->createQuery(
-				'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
-			)
-			->setParameter('uzytkownik', $uzytkownik);
-			
-			$ilosc = $queryIlosc->getResult();
-			
-			return $this->redirect($this->generateUrl('fos_user_security_login', array('ilosc' => $ilosc)));
+
+			return $this->redirect($this->generateUrl('fos_user_security_login', array()));
 			
 		} else {
 			
-			if ($this->getUser() == null)
-			{
-				$uzytkownik2 = '';
-				
-			} else
-			{
-				$uzytkownik2 = $this->getUser()->getUsername();
-			}
-			
+			$uzytkownik2 = $this->getUser()->getUsername();
 			$uzytkownik = $this->getUser()->getId();
 		
 			$em = $this->getDoctrine()->getManager();
@@ -77,6 +61,25 @@ class WypozyczeniaController extends Controller
 	
 	public function createAction()
 	{
+		if ($this->getUser() == null)
+		{
+			$uzytkownik2 = '####';
+			$uzytkownik = '';
+			$em = $this->getDoctrine()->getManager();
+			$query = $em->createQuery(
+			'UPDATE UekDemoBundle:Koszyk k SET k.uzytkownik = ?1 WHERE k.uzytkownik = ?2'
+			)
+			->setParameters(array(1 => $uzytkownik2, 2 => $uzytkownik));
+			
+			$koszyk = $query->getResult();
+		
+			return $this->redirect($this->generateUrl('fos_user_security_login'));
+		
+		} else {
+			
+			return $this->redirect($this->generateUrl('uek_demo_platnosci_pay'));
+		
+		}
 		
 	}
 	

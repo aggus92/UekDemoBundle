@@ -87,3 +87,8 @@ uek_demo_koszyk_clean:
     path:     /koszyk/clean
     defaults:
         _controller: UekDemoBundle:Koszyk:clean
+
+uek_demo_platnosci_pay:
+    path:     /platnosc/pay
+    defaults:
+        _controller: UekDemoBundle:Platnosci:pay

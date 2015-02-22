@@ -28,7 +28,9 @@
 			<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
 			<label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
 		</div>
-
+		{% if app.request.get('_route') != app.request.headers.get('referer') %}    
+			<input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}" />    
+		{% endif %}
 		<input type="submit" id="_submit" name="_submit" class="btn btn-primary" value="{{ 'security.login.submit'|trans }}"  />
 	</form>
 {% endblock fos_user_content %}

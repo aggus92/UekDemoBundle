@@ -20,6 +20,10 @@ security:
             form_login:
                 check_path: _demo_security_check
                 login_path: _demo_login
+                always_use_default_target_path: false
+                default_target_path: /
+                target_path_parameter: _target_path
+                use_referer: true
             logout:
                 path:   _demo_logout
                 target: _demo

@@ -49,17 +49,9 @@ class RecenzjaController extends Controller
 	public function createAction(Request $request)
 	{	
 		if ($this->getUser() == null)
-		{
-			$uzytkownik = '';
-			$em = $this->getDoctrine()->getManager();
-			$queryIlosc = $em->createQuery(
-				'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
-			)
-			->setParameter('uzytkownik', $uzytkownik);
+		{	
+			return $this->redirect($this->generateUrl('fos_user_security_login', array()));
 			
-			$ilosc = $queryIlosc->getResult();
-			
-			return $this->redirect($this->generateUrl('fos_user_security_login', array('ilosc' => $ilosc)));
 		} else
 		{
 			$uzytkownik = $this->getUser()->getUsername();
@@ -105,16 +97,8 @@ class RecenzjaController extends Controller
 	{	
 		if ($this->getUser() == null)
 		{
-			$uzytkownik = "";
-			$em = $this->getDoctrine()->getManager();
-			$queryIlosc = $em->createQuery(
-				'SELECT COUNT(k.idfilmu) AS ilosc FROM UekDemoBundle:Koszyk k WHERE k.uzytkownik = :uzytkownik'
-			)
-			->setParameter('uzytkownik', $uzytkownik);
+			return $this->redirect($this->generateUrl('fos_user_security_login', array()));
 			
-			$ilosc = $queryIlosc->getResult();
-			
-			return $this->redirect($this->generateUrl('fos_user_security_login', array('ilosc' => $ilosc)));
 		}
 		else
 		{

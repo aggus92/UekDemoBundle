@@ -18,7 +18,18 @@ class KoszykController extends Controller
 		} else
 		{
 			$uzytkownik = $this->getUser()->getUsername();
+			
+			$uzytkownik2 = '####';
+			$em = $this->getDoctrine()->getManager();
+			$query = $em->createQuery(
+			'UPDATE UekDemoBundle:Koszyk k SET k.uzytkownik = ?1 WHERE k.uzytkownik = ?2'
+			)
+			->setParameters(array(1 => $uzytkownik, 2 => $uzytkownik2));
+			
+			$koszyk = $query->getResult();
+			
 		}
+		
 		$em = $this->getDoctrine()->getManager();
 		
 		$query = $em->createQuery(
@@ -65,14 +76,7 @@ class KoszykController extends Controller
 		$em->persist($koszyk);
 		$em->flush();
 					
-		return $this->redirect($this->generateUrl('uek_demo_filmy_seeRec', array('id' => $idfilmu, 'recenzja' => $dodano)));
-
-		return $this->render(
-			'UekDemoBundle:Koszyk:add.html.twig',
-			array(
-				'koszyk' => $koszyk
-			)
-		);	
+		return $this->redirect($this->generateUrl('uek_demo_filmy_seeRec', array('id' => $idfilmu, 'recenzja' => $dodano)));	
 	}
 	
 	public function deleteAction($idfilmu)
@@ -92,14 +96,7 @@ class KoszykController extends Controller
 		$em->remove($koszyk);
 		$em->flush();
 					
-		return $this->redirect($this->generateUrl('uek_demo_koszyk_index'));
-
-		return $this->render(
-			'UekDemoBundle:Koszyk:add.html.twig',
-			array(
-				'koszyk' => $koszyk
-			)
-		);	
+		return $this->redirect($this->generateUrl('uek_demo_koszyk_index'));	
 	}
 	
 	public function cleanAction()
@@ -121,12 +118,5 @@ class KoszykController extends Controller
 		$koszyk = $query->getResult();
 		
 		return $this->redirect($this->generateUrl('uek_demo_koszyk_index'));
-
-		return $this->render(
-			'UekDemoBundle:Koszyk:add.html.twig',
-			array(
-				'koszyk' => $koszyk
-			)
-		);	
 	}
 }
